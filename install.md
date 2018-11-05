@@ -115,7 +115,7 @@ sudo apt-get install docker.io
 ### Tải source code và cài các gói cần thiết để chạy code 
 ```
 git clone https://github.com/vuvandang1995/SmCl.git
-cd Smart-class
+cd SmCl
 export LC_ALL="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 sudo pip3 install -r requirement.txt
@@ -187,11 +187,11 @@ server {
         location = /favicon.ico { access_log off; log_not_found off; }
 
         location /static/ {
-                root /home/ticket/Smart-class/SmartClass/teacher;
+                root /home/ticket/SmCl/SmartClass/teacher;
         }
 
         location /media/ {
-                root /home/ticket/Smart-class/SmartClass;
+                root /home/ticket/SmCl/SmartClass;
         }
 
         location / {
@@ -221,7 +221,7 @@ After=network.target
 [Service]
 User=root
 Group=www-data
-WorkingDirectory=/home/ticket/Smart-class/SmartClass
+WorkingDirectory=/home/ticket/SmCl/SmartClass
 ExecStart=/usr/local/bin/gunicorn -c gunicorn_conf.py --keyfile /etc/ssl/private/nginx-selfsigned.key --certfile /etc/ssl/certs/nginx-selfsigned.crt SmartClass.wsgi:application --reload
 
 [Install]
@@ -239,7 +239,7 @@ After=network.target
 [Service]
 Type=simple
 User=root
-WorkingDirectory=/home/ticket/Smart-class/SmartClass
+WorkingDirectory=/home/ticket/SmCl/SmartClass
 ExecStart=/usr/local/bin/daphne -e ssl:8443:privateKey=/etc/ssl/private/nginx-selfsigned.key:certKey=/etc/ssl/certs/nginx-selfsigned.crt SmartClass.asgi:application
 Restart=on-failure
 
@@ -248,7 +248,7 @@ WantedBy=multi-user.target
 ```
 ### Chỉnh sửa code
 **thay tất cả địa chỉ I xuất hiện bên dưới bằng địa chỉ của mysql server cho phù hợp port giữ nguyên**
-`cd /home/ticket/Smart-class/SmartClass/`
+`cd /home/ticket/SmCl/SmartClass/`
 - `nano SmartClass/settings.py`
     - sửa dòng 112:`'HOST': '192.168.100.22',`
 - `nano student/templates/student/subjects.html`
@@ -268,7 +268,7 @@ WantedBy=multi-user.target
 
 ### Migrate database
 ```
-cd /home/ticket/Smart-class/SmartClass/
+cd /home/ticket/SmCl/SmartClass/
 python3 manage.py migrate
 ```
 ### Chạy web server
