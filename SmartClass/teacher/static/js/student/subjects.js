@@ -1,12 +1,12 @@
 $(document).ready(function(){
     var teacher_name = $('#teacher_name').text();
     $('#noti').show();
-    // var chatallSocket = new WebSocket(
-    //     'ws://' + window.location.host +
-    //     '/ws/' + teacher_name + 'chatall'+lop+'*std*'+userName+'/');
     var chatallSocket = new WebSocket(
-        'wss://' + window.location.host +
-        ':8443/ws/' + teacher_name + 'chatall'+lop+'*std*'+userName+'/');
+        'ws://' + window.location.host +
+        '/ws/' + teacher_name + 'chatall'+lop+'*std*'+userName+'/');
+    // var chatallSocket = new WebSocket(
+    //     'wss://' + window.location.host +
+    //     ':8443/ws/' + teacher_name + 'chatall'+lop+'*std*'+userName+'/');
 
 
     chatallSocket.onmessage = function(e) {
@@ -345,12 +345,12 @@ $(document).ready(function(){
             //  $("body .noti_chat"+std_username).hide();
             $('body #'+std).children('.frame_std').show();
             $("body .chat"+userName+" > ul").empty();
-            socket_teacher = new WebSocket(
-                'wss://' + window.location.host +
-                ':8443/ws/' + userName +teacher_name+lop+'chat11/');
             // socket_teacher = new WebSocket(
-            //     'ws://' + window.location.host +
-            //     '/ws/' + userName +teacher_name+lop+'chat11/');
+            //     'wss://' + window.location.host +
+            //     ':8443/ws/' + userName +teacher_name+lop+'chat11/');
+            socket_teacher = new WebSocket(
+                'ws://' + window.location.host +
+                '/ws/' + userName +teacher_name+lop+'chat11/');
             if (typeof(Storage) !== "undefined") {
                 // Gán dữ liệu
                 sessionStorage.setItem(teacher_name, socket_teacher);

@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'k1^5!@h0ovice6d%4)zxak4=r_y9zkx=$m1sij8&+)rsw=$%ak'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 ASGI_APPLICATION = 'SmartClass.routing.application'
