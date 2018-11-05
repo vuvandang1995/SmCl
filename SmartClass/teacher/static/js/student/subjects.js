@@ -14,7 +14,6 @@ $(document).ready(function(){
         var message = data['message'];
         var who = data['who'];
         var time = data['time'];
-        var noti_noti1 = data['noti_noti'];
         if (time == 'None'){
             if (key == ''){
                 chatallSocket.send(JSON.stringify({
