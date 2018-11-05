@@ -221,7 +221,7 @@ def user_mon(request):
 def lop_mon(user):
     lop = ChiTietLop.objects.get(myuser_id=user)
     try:
-        ten_lop = lop.lop_id.ten[:2]
+        ten_lop = int(lop.lop_id.ten[:2])
     except:
         ten_lop = lop.lop_id.ten[0]
     all_mon = Mon.objects.filter(lop=ten_lop)

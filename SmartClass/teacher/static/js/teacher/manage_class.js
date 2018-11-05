@@ -1,8 +1,8 @@
 $(document).ready(function(){
     var class_ =  $('#lopht').text();
-//    chatallSocket = new WebSocket(
-//        'ws://' + window.location.host +
-//        '/ws/' + userName + 'chatall'+class_+'/');
+    // chatallSocket = new WebSocket(
+    //    'ws://' + window.location.host +
+    //    '/ws/' + userName + 'chatall'+class_+'/');
     
     chatallSocket = new WebSocket(
         'wss://' + window.location.host +
@@ -144,9 +144,9 @@ $(document).ready(function(){
                 connection.join(group_name);
             } else {
                 connection.open(group_name);
-//                var xxx = new WebSocket(
-//                    'ws://' + window.location.host +
-//                    '/ws/' + gr_chat_name + 'chatgroup/');
+                // var xxx = new WebSocket(
+                //    'ws://' + window.location.host +
+                //    '/ws/' + gr_chat_name + 'chatgroup/');
                 
                 var xxx = new WebSocket(
                     'wss://' + window.location.host +
@@ -352,9 +352,9 @@ $(document).ready(function(){
             // }
 
             if (dict_ws[std_username] == undefined){
-//                dict_ws[std_username] = new WebSocket(
-//                'ws://' + window.location.host +
-//                '/ws/' + std_username + 'chat11/');
+            //    dict_ws[std_username] = new WebSocket(
+            //    'ws://' + window.location.host +
+            //    '/ws/' + std_username + userName +class_+'chat11/');
                 dict_ws[std_username] = new WebSocket(
                 'wss://' + window.location.host +
                 ':8443/ws/' + std_username + userName +class_+'chat11/');
@@ -383,7 +383,7 @@ $(document).ready(function(){
                     }else{
                         control = '<li style="width:75%">' +
                             '<h4 style="margin-bottom: -3px;margin-left: 10%;font-size: 12px;">'+who+'</h4>'+
-                            '<div class="avatar" style="padding:5px 0px 0px 10px;width: 20%;margin-left: -12%;margin-top: 5%; !important"><img class="img-circle" style="width:90%;" src="'+me.avatar+'" /></div>'+
+                            '<div class="avatar" style="padding:5px 0px 0px 10px;width: 20%;margin-left: -12%;margin-top: 5%; !important"><img class="img-circle" style="width:90%;" src="https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/User_man_male_profile_account_person_people.png" /></div>'+
                             '<div class="msj-rta macro">' +
                                 '<div class="text text-r">' +
                                     '<p style="color: #444950;line-height: 17px;word-break: break-all;">'+text+'</p>' +
@@ -447,9 +447,9 @@ $(document).ready(function(){
             }
             var group_chat_name = $(this).children('p').first().text();
             if (dict_group_chat[group_chat_name] == undefined){
-//                dict_group_chat[group_chat_name] = new WebSocket(
-//                'ws://' + window.location.host +
-//                '/ws/' + group_chat_name + 'chatgroup/');
+            //    dict_group_chat[group_chat_name] = new WebSocket(
+            //    'ws://' + window.location.host +
+            //    '/ws/' + group_chat_name + 'chatgroup/');
                 dict_group_chat[group_chat_name] = new WebSocket(
                 'wss://' + window.location.host +
                 ':8443/ws/' + group_chat_name + 'chatgroup/');
@@ -488,7 +488,7 @@ $(document).ready(function(){
                   }else{
                     control = '<li style="width:75%">' +
                         '<h4 style="margin-bottom: -3px;margin-left: 10%;font-size: 12px;">'+who+'</h4>'+
-                        '<div class="avatar" style="padding:5px 0px 0px 10px !important"><img class="img-circle" style="width:90%;" src="'+me.avatar+'" /></div>'+
+                        '<div class="avatar" style="padding:5px 0px 0px 10px !important"><img class="img-circle" style="width:90%;" src="https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/User_man_male_profile_account_person_people.png" /></div>'+
                         '<div class="msj-rta macro">' +
                             '<div class="text text-r">' +
                                 '<p style="color: #444950;word-break: break-all;">'+text+'</p>' +

@@ -1,7 +1,7 @@
 $(document).ready(function(){
-//    var shareAllSocket = new WebSocket(
-//        'ws://' + window.location.host +
-//        '/ws/' + teacher_name + 'shareAll'+lopht+'/');
+    // var shareAllSocket = new WebSocket(
+    //    'ws://' + window.location.host +
+    //    '/ws/' + teacher_name + 'shareAll'+lopht+'/');
 
     var shareAllSocket = new WebSocket(
         'wss://' + window.location.host +
@@ -29,6 +29,10 @@ $(document).ready(function(){
 
     $('body').on('click', '#reconnect', function(){
         reconnect();
+    });
+
+    $('#back').click(function(){
+        window.history.back();
     });
 
     shareAllSocket.onmessage = function(e) {

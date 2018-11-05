@@ -45,7 +45,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
         )
 
         await self.accept()
-        print(self.room_group_name)
         try:
             f = r'notification/chat/class/'+self.room_group_name+'.txt'
             file = open(f,'r')
@@ -204,13 +203,13 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 # teacher = MyUser.objects.get(username=who)
                 # teacher.noti_noti = teacher.noti_noti + 1
                 # teacher.save()
-        elif time != 'None' and time != 'call_time' and time != 'teacher_change_group' and time != 'teacher_call' and time != 'key' and message != 'new_chat' and 'shareall' not in self.room_group_name:
+        elif time != 'None' and time != 'call_time' and time != 'teacher_change_group' and time != 'teacher_call' and time != 'key' and message != 'new_chat' and 'shareAll' not in self.room_group_name:
             f = r'notification/chat/class/'+self.room_group_name+'.txt'
             removeLines(path=f,number=40)
             file = open(f,'a')
             file.write(message + "^%$^%$&^"+ who +"^%$^%$&^"+ time + "\n") 
             file.close()  
-        print(time)
+        print(self.room_group_name)
         await self.channel_layer.group_send(
             self.room_group_name,
             {

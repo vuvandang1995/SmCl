@@ -13,7 +13,7 @@ connection.sdpConstraints.mandatory = {
 };
 connection.mediaConstraints.video = false;
 
-connection.maxParticipantsAllowed = 5; // one-to-one
+connection.maxParticipantsAllowed = 100; // one-to-one
 connection.onRoomFull = function(roomid) {
   alert('Room is full.');
 };

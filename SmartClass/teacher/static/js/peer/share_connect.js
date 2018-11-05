@@ -1,6 +1,6 @@
 var audio_broad = new RTCMultiConnection();
 var roomName = window.atob(location.href.split("_")[1]);
-audio_broad.socketURL = 'https://192.168.100.23:9443/';
+audio_broad.socketURL = 'https://192.168.100.22:9443/';
 audio_broad.extra = {
     username: ten_dang_nhap,
     fullname: ho_ten,

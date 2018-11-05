@@ -1,7 +1,7 @@
 $(document).ready(function(){
-//    shareAllSocket = new WebSocket(
-//        'ws://' + window.location.host +
-//        '/ws/' + userName + 'shareAll'+lopht+'/');
+    // shareAllSocket = new WebSocket(
+    //     'ws://' + window.location.host +
+    //     '/ws/' + userName + 'shareAll'+lopht+'/');
 
     shareAllSocket = new WebSocket(
         'wss://' + window.location.host +
