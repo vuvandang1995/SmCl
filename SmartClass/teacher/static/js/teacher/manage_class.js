@@ -352,12 +352,12 @@ $(document).ready(function(){
             // }
 
             if (dict_ws[std_username] == undefined){
-               dict_ws[std_username] = new WebSocket(
-               'ws://' + window.location.host +
-               '/ws/' + std_username + userName +class_+'chat11/');
-                // dict_ws[std_username] = new WebSocket(
-                // 'wss://' + window.location.host +
-                // ':8443/ws/' + std_username + userName +class_+'chat11/');
+            //    dict_ws[std_username] = new WebSocket(
+            //    'ws://' + window.location.host +
+            //    '/ws/' + std_username + userName +class_+'chat11/');
+                dict_ws[std_username] = new WebSocket(
+                'wss://' + window.location.host +
+                ':8443/ws/' + std_username + userName +class_+'chat11/');
                 $("body .chat"+std_username+" > ul").empty();
                 var me = {};
                 me.avatar = "https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/User_man_male_profile_account_person_people.png";
