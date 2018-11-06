@@ -1,12 +1,12 @@
 $(document).ready(function(){
     var class_ =  $('#lopht').text();
-    chatallSocket = new WebSocket(
-       'ws://' + window.location.host +
-       '/ws/' + userName + 'chatall'+class_+'/');
-    
     // chatallSocket = new WebSocket(
-    //     'wss://' + window.location.host +
-    //     ':8443/ws/' + userName + 'chatall'+class_+'/');
+    //    'ws://' + window.location.host +
+    //    '/ws/' + userName + 'chatall'+class_+'/');
+    
+    chatallSocket = new WebSocket(
+        'wss://' + window.location.host +
+        ':8443/ws/' + userName + 'chatall'+class_+'/');
 
     
     chatallSocket.onmessage = function(e) {

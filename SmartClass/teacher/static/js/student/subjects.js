@@ -1,12 +1,12 @@
 $(document).ready(function(){
     var teacher_name = $('#teacher_name').text();
     $('#noti').show();
-    var chatallSocket = new WebSocket(
-        'ws://' + window.location.host +
-        '/ws/' + teacher_name + 'chatall'+lop+'*std*'+userName+'/');
     // var chatallSocket = new WebSocket(
-    //     'wss://' + window.location.host +
-    //     ':8443/ws/' + teacher_name + 'chatall'+lop+'*std*'+userName+'/');
+    //     'ws://' + window.location.host +
+    //     '/ws/' + teacher_name + 'chatall'+lop+'*std*'+userName+'/');
+    var chatallSocket = new WebSocket(
+        'wss://' + window.location.host +
+        ':8443/ws/' + teacher_name + 'chatall'+lop+'*std*'+userName+'/');
 
 
     chatallSocket.onmessage = function(e) {
@@ -436,11 +436,13 @@ $(document).ready(function(){
         'who' : userName,
         'time' : date
         }));
-        chatallSocket.send(JSON.stringify({
-            'message' : `new_chat_for_teaccher`,
-            'who' : teacher_name,
-            'time' : userName
-        }));
+        setTimeout(function(){
+            chatallSocket.send(JSON.stringify({
+                'message' : `new_chat_for_teaccher`,
+                'who' : teacher_name,
+                'time' : userName
+            }));
+        }, 2000);
     }
     $(this).parent().parent().children().children().children('input').val('');
     })
