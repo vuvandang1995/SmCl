@@ -3,7 +3,7 @@ $(document).ready(function(){
     //    'ws://' + window.location.host +
     //    '/ws/' + teacher_name + 'shareAll'+lopht+'/');
 
-    var shareAllSocket = new WebSocket(
+    var shareAllSocket = new ReconnectingWebSocket(
         'wss://' + window.location.host +
         ':8443/ws/' + teacher_name + 'shareAll'+lopht+'/');
 

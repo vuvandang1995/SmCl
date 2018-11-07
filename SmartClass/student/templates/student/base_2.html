@@ -38,15 +38,16 @@
       <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js' %}"></script>
       <script src="{% static 'build/js/custom.js' %}"></script>
       <script src="{% static 'js/teacher/chat_student.js' %}"></script>
+      <script src="{% static 'js/teacher/wsk/reconnecting-websocket.min.js' %}"></script>
       {% endblock %}
     <script>
       var userName = {{ username }};
 
-      /*var userSocket = new WebSocket(
+      /*var userSocket = new ReconnectingWebSocket(
           'ws://' + window.location.host +
           '/ws/' + userName + '/');*/
       
-      var userSocket = new WebSocket(
+      var userSocket = new ReconnectingWebSocket(
           'wss://' + window.location.host +
           ':8443/ws/' + userName + '/');
 

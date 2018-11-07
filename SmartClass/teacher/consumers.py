@@ -23,8 +23,8 @@ def removeLines(path, number):
         pass
 
 
-class ChatConsumer(AsyncWebsocketConsumer):
-    async def connect(self):
+class ChatConsumer(WebsocketConsumer):
+    def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['room_name']
         if 'chatall' in self.room_name:
             if '*std*' in self.room_name:
@@ -39,12 +39,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
         else:
             self.room_group_name = self.room_name
         # Join room group
-        await self.channel_layer.group_add(
+        async_to_sync(self.channel_layer.group_add)(
             self.room_group_name,
             self.channel_name
         )
-
-        await self.accept()
+        self.accept()
         try:
             f = r'notification/chat/class/'+self.room_group_name+'.txt'
             file = open(f,'r')
@@ -55,7 +54,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             #             message = line.split('^%$^%$&^')[0]
             #             who = line.split('^%$^%$&^')[1].strip()
             #             time = line.split('^%$^%$&^')[2].strip()
-            #             await self.send(text_data=json.dumps({
+            #              self.send(text_data=json.dumps({
             #                     'message': message,
             #                     'who': who,
             #                     'time' : time
@@ -67,7 +66,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 message = line.split('^%$^%$&^')[0]
                 who = line.split('^%$^%$&^')[1].strip()
                 time = line.split('^%$^%$&^')[2].strip()
-                await self.send(text_data=json.dumps({
+                self.send(text_data=json.dumps({
                         'message': message,
                         'who': who,
                         'time' : time
@@ -85,7 +84,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             #             message = line.split('^%$^%$&^')[0]
             #             who = line.split('^%$^%$&^')[1].strip()
             #             time = line.split('^%$^%$&^')[2].strip()
-            #             await self.send(text_data=json.dumps({
+            #              self.send(text_data=json.dumps({
             #                     'message': message,
             #                     'who': who,
             #                     'time' : time
@@ -94,7 +93,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                         
             # else:
             for line in file:
-                await self.send(text_data=json.dumps({
+                 self.send(text_data=json.dumps({
                         'message': line,
                         'who': line,
                         'time' : line
@@ -112,7 +111,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             #             message = line
             #             who = 'teacher'
             #             time = 'history_noti'
-            #             await self.send(text_data=json.dumps({
+            #              self.send(text_data=json.dumps({
             #                     'message': message,
             #                     'who': who,
             #                     'time' : time
@@ -122,7 +121,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 message = line
                 who = 'teacher'
                 time = 'history_noti'
-                await self.send(text_data=json.dumps({
+                self.send(text_data=json.dumps({
                         'message': message,
                         'who': who,
                         'time' : time
@@ -130,18 +129,17 @@ class ChatConsumer(AsyncWebsocketConsumer):
         except:
             pass
 
-    async def disconnect(self, close_code):
+    def disconnect(self, close_code):
         # Leave room group
-        await self.channel_layer.group_discard(
+        async_to_sync(self.channel_layer.group_discard)(
             self.room_group_name,
             self.channel_name
         )
-        # logout(self.scope)
         
 
 
     # Receive message from WebSocket
-    async def receive(self, text_data):
+    def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
         who = text_data_json['who']
@@ -209,8 +207,7 @@ class ChatConsumer(AsyncWebsocketConsumer):
             file = open(f,'a')
             file.write(message + "^%$^%$&^"+ who +"^%$^%$&^"+ time + "\n") 
             file.close()  
-        print(self.room_group_name)
-        await self.channel_layer.group_send(
+        async_to_sync(self.channel_layer.group_send)(
             self.room_group_name,
             {
                 'type': 'chat_message',
@@ -220,20 +217,19 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 'noti_noti': '.'
             }
         )
+        print(self.room_group_name)
+
 
     # Receive message from room group
-    async def chat_message(self, event):
+    def chat_message(self, event):
         message = event['message']
         who = event['who']
         time = event['time']
         noti_noti = event['noti_noti']
         # Send message to WebSocket
-        await self.send(text_data=json.dumps({
+        self.send(text_data=json.dumps({
             'message': message,
             'who': who,
             'time': time,
             'noti_noti': noti_noti
         }))
-
-
-

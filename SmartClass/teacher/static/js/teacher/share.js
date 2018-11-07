@@ -1,9 +1,9 @@
 $(document).ready(function(){
-    // shareAllSocket = new WebSocket(
+    // shareAllSocket = new ReconnectingWebSocket(
     //     'ws://' + window.location.host +
     //     '/ws/' + userName + 'shareAll'+lopht+'/');
 
-    shareAllSocket = new WebSocket(
+    shareAllSocket = new ReconnectingWebSocket(
         'wss://' + window.location.host +
         ':8443/ws/' + userName + 'shareAll'+lopht+'/');
 

@@ -1,10 +1,10 @@
 $(document).ready(function(){
     var teacher_name = $('#teacher_name').text();
     $('#noti').show();
-    // var chatallSocket = new WebSocket(
+    // var chatallSocket = new ReconnectingWebSocket(
     //     'ws://' + window.location.host +
     //     '/ws/' + teacher_name + 'chatall'+lop+'*std*'+userName+'/');
-    var chatallSocket = new WebSocket(
+    var chatallSocket = new ReconnectingWebSocket(
         'wss://' + window.location.host +
         ':8443/ws/' + teacher_name + 'chatall'+lop+'*std*'+userName+'/');
 
@@ -181,10 +181,10 @@ $(document).ready(function(){
                 $('body .list_group_all').append(element);
                 if ($('#group_class').length){
                     var group_chat_name = $('#group_class').children('p').first().text();
-                //    var chatgroup = new WebSocket(
+                //    var chatgroup = new ReconnectingWebSocket(
                 //    'ws://' + window.location.host +
                 //    '/ws/' + group_chat_name + 'chatgroup/');
-                    var chatgroup = new WebSocket(
+                    var chatgroup = new ReconnectingWebSocket(
                         'wss://' + window.location.host +
                         ':8443/ws/' + group_chat_name + 'chatgroup/');
                     var group_name = $('#group_class').children('p').next('p').text();
@@ -293,9 +293,9 @@ $(document).ready(function(){
 
                     $('#audiocall').attr('name', group_name);
                 };
-                if (sessionStorage.getItem(teacher_name) != null){
-                    $('#mail_list').click();
-                }
+                // if (sessionStorage.getItem(teacher_name) != null){
+                //     $('#mail_list').click();
+                // }
 
             }
         });
@@ -328,6 +328,67 @@ $(document).ready(function(){
 
     
     var socket_teacher;
+    socket_teacher = new ReconnectingWebSocket(
+        'wss://' + window.location.host +
+        ':8443/ws/' + userName +teacher_name+lop+'chat11/');
+    // socket_teacher = new ReconnectingWebSocket(
+    //     'ws://' + window.location.host +
+    //     '/ws/' + userName +teacher_name+lop+'chat11/');
+
+        
+    var me = {};
+    me.avatar = "https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/User_man_male_profile_account_person_people.png";
+
+    var you = {};
+    you.avatar = "https://cdn2.iconfinder.com/data/icons/rcons-users-color/32/support_man-512.png";      
+
+    //-- No use time. It is a javaScript effect.
+    function insertChat1(who, text, time){
+        if (time === undefined){
+            time = 0;
+        }
+        var control = "";
+        var date = time;
+        
+        if (who == userName){
+        control = '<li style="padding-top: 15px;margin-left: 5em;width:75%;">' +
+                '<div class="msj-rta macro" style="background-color: #BFE9F9;">' +
+                    '<div class="text text-r">' +
+                    '<p style="color: #444950;line-height: 17px;word-break: break-all;">'+text+'</p>' +
+                    '<p><small style="color: #444950;">'+date+'</small></p>' +
+                    '</div></div></li>';
+        }else{
+        control = '<li style="width:75%">' +
+            '<h4 style="margin-bottom: -3px;margin-left: 10%;font-size: 12px;">'+who+'</h4>'+
+            '<div class="avatar" style="padding:5px 0px 0px 10px;width: 20%;margin-left: -12%;margin-top: 5%; !important"><img class="img-circle" style="width:90%;" src="https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/User_man_male_profile_account_person_people.png" /></div>'+
+            '<div class="msj-rta macro">' +
+            '<div class="text text-r">' +
+                '<p style="color: #444950;line-height: 17px;word-break: break-all;">'+text+'</p>' +
+                '<p><small style="color: #444950;">'+date+'</small></p>' +
+            '</div></div>' +
+            '</li>';
+        }
+        setTimeout(
+            function(){                        
+                $(".chat"+userName).children('ul').append(control).scrollTop($(".chat"+userName).children('ul').prop('scrollHeight'));
+            }, time);
+        
+    }
+
+    
+    socket_teacher.onmessage = function(e) {
+        var data = JSON.parse(e.data);
+        var message = data['message'];
+        var who = data['who'];
+        var time = data['time'];
+        $('#mail_list').click();
+        insertChat1(who, message, time);
+	    $("body .mytext1").prop('disabled', false);
+    };
+	setTimeout(function(){
+    	$("body .chat"+userName).hide();
+		$("body .mytext1").prop('disabled', true);
+    }, 500);
     $('#mail_list').on('click',function(){
         //  if (typeof(Storage) !== "undefined") {
         //     var herf = $(this).attr('href');
@@ -344,69 +405,16 @@ $(document).ready(function(){
             register_popup(userName, $('#teacher_fullname').text());
             //  $("body .noti_chat"+std_username).hide();
             $('body #'+std).children('.frame_std').show();
-            $("body .chat"+userName+" > ul").empty();
-            socket_teacher = new WebSocket(
-                'wss://' + window.location.host +
-                ':8443/ws/' + userName +teacher_name+lop+'chat11/');
-            // socket_teacher = new WebSocket(
-            //     'ws://' + window.location.host +
-            //     '/ws/' + userName +teacher_name+lop+'chat11/');
-            if (typeof(Storage) !== "undefined") {
-                // Gán dữ liệu
-                sessionStorage.setItem(teacher_name, socket_teacher);
+            // if (typeof(Storage) !== "undefined") {
+            //     // Gán dữ liệu
+            //     sessionStorage.setItem(teacher_name, socket_teacher);
                     
-                // Lấy dữ liệu
-            } else {
-                document.write('Trình duyệt của bạn không hỗ trợ local storage');
-            }
-
-            var me = {};
-            me.avatar = "https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/User_man_male_profile_account_person_people.png";
-
-            var you = {};
-            you.avatar = "https://cdn2.iconfinder.com/data/icons/rcons-users-color/32/support_man-512.png";      
-
-            //-- No use time. It is a javaScript effect.
-            function insertChat1(who, text, time){
-                if (time === undefined){
-                    time = 0;
-                }
-                var control = "";
-                var date = time;
-                
-                if (who == userName){
-                control = '<li style="padding-top: 15px;margin-left: 5em;width:75%;">' +
-                        '<div class="msj-rta macro" style="background-color: #BFE9F9;">' +
-                            '<div class="text text-r">' +
-                            '<p style="color: #444950;line-height: 17px;word-break: break-all;">'+text+'</p>' +
-                            '<p><small style="color: #444950;">'+date+'</small></p>' +
-                            '</div></div></li>';
-                }else{
-                control = '<li style="width:75%">' +
-                    '<h4 style="margin-bottom: -3px;margin-left: 10%;font-size: 12px;">'+who+'</h4>'+
-                    '<div class="avatar" style="padding:5px 0px 0px 10px;width: 20%;margin-left: -12%;margin-top: 5%; !important"><img class="img-circle" style="width:90%;" src="https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/User_man_male_profile_account_person_people.png" /></div>'+
-                    '<div class="msj-rta macro">' +
-                    '<div class="text text-r">' +
-                        '<p style="color: #444950;line-height: 17px;word-break: break-all;">'+text+'</p>' +
-                        '<p><small style="color: #444950;">'+date+'</small></p>' +
-                    '</div></div>' +
-                    '</li>';
-                }
-                setTimeout(
-                    function(){                        
-                        $(".chat"+std).children('ul').append(control).scrollTop($(".chat"+std).children('ul').prop('scrollHeight'));
-                    }, time);
-                
-            }
+            //     // Lấy dữ liệu
+            // } else {
+            //     document.write('Trình duyệt của bạn không hỗ trợ local storage');
+            // }
 
             
-            socket_teacher.onmessage = function(e) {
-                var data = JSON.parse(e.data);
-                var message = data['message'];
-                var who = data['who'];
-                var time = data['time'];
-                insertChat1(who, message, time);
-            };
         }
 
         });
@@ -436,21 +444,21 @@ $(document).ready(function(){
         'who' : userName,
         'time' : date
         }));
-        setTimeout(function(){
+        /*setTimeout(function(){
             chatallSocket.send(JSON.stringify({
                 'message' : `new_chat_for_teaccher`,
                 'who' : teacher_name,
                 'time' : userName
             }));
-        }, 2000);
+        }, 2000);*/
     }
     $(this).parent().parent().children().children().children('input').val('');
     })
 
-    $('body').on('click', '.chat-close', function(){
-        socket_teacher.close();
+    //$('body').on('click', '.chat-close', function(){
+        //socket_teacher.close();
         // sessionStorage.removeItem(tk_id);
-        sessionStorage.removeItem(teacher_name);
-        $("body .chat"+userName+" > ul").empty();
-    })
+        //sessionStorage.removeItem(teacher_name);
+        //$("body .chat"+userName+" > ul").empty();
+    //})
 });

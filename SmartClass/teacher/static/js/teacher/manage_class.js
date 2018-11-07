@@ -1,14 +1,13 @@
 $(document).ready(function(){
     var class_ =  $('#lopht').text();
-    // chatallSocket = new WebSocket(
+    // chatallSocket = new ReconnectingWebSocket(
     //    'ws://' + window.location.host +
     //    '/ws/' + userName + 'chatall'+class_+'/');
     
-    chatallSocket = new WebSocket(
+    chatallSocket = new ReconnectingWebSocket(
         'wss://' + window.location.host +
         ':8443/ws/' + userName + 'chatall'+class_+'/');
 
-    
     chatallSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
         var message = data['message'];
@@ -144,11 +143,11 @@ $(document).ready(function(){
                 connection.join(group_name);
             } else {
                 connection.open(group_name);
-                // var xxx = new WebSocket(
+                // var xxx = new ReconnectingWebSocket(
                 //    'ws://' + window.location.host +
                 //    '/ws/' + gr_chat_name + 'chatgroup/');
                 
-                var xxx = new WebSocket(
+                var xxx = new ReconnectingWebSocket(
                     'wss://' + window.location.host +
                     ':8443/ws/' + gr_chat_name + 'chatgroup/');
 
@@ -315,11 +314,11 @@ $(document).ready(function(){
             data:{'csrfmiddlewaretoken': token, 'number_mem':number_mem},
             success: function(){
                 document.getElementById("close_modal_create").click();
-                chatallSocket.send(JSON.stringify({
-                    'message' : 'teacher_change_group',
-                    'who' : userName,
-                    'time' : 'teacher_change_group'
-                }));
+                // chatallSocket.send(JSON.stringify({
+                //     'message' : 'teacher_change_group',
+                //     'who' : userName,
+                //     'time' : 'teacher_change_group'
+                // }));
                 reload();
             }
         });
@@ -352,12 +351,12 @@ $(document).ready(function(){
             // }
 
             if (dict_ws[std_username] == undefined){
-            //    dict_ws[std_username] = new WebSocket(
+            //    dict_ws[std_username] = new ReconnectingWebSocket(
             //    'ws://' + window.location.host +
             //    '/ws/' + std_username + userName +class_+'chat11/');
-                dict_ws[std_username] = new WebSocket(
-                'wss://' + window.location.host +
-                ':8443/ws/' + std_username + userName +class_+'chat11/');
+                 dict_ws[std_username] = new ReconnectingWebSocket(
+                 'wss://' + window.location.host +
+                 ':8443/ws/' + std_username + userName +class_+'chat11/');
                 $("body .chat"+std_username+" > ul").empty();
                 var me = {};
                 me.avatar = "https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/User_man_male_profile_account_person_people.png";
@@ -447,10 +446,10 @@ $(document).ready(function(){
             }
             var group_chat_name = $(this).children('p').first().text();
             if (dict_group_chat[group_chat_name] == undefined){
-            //    dict_group_chat[group_chat_name] = new WebSocket(
+            //    dict_group_chat[group_chat_name] = new ReconnectingWebSocket(
             //    'ws://' + window.location.host +
             //    '/ws/' + group_chat_name + 'chatgroup/');
-                dict_group_chat[group_chat_name] = new WebSocket(
+                dict_group_chat[group_chat_name] = new ReconnectingWebSocket(
                 'wss://' + window.location.host +
                 ':8443/ws/' + group_chat_name + 'chatgroup/');
             }
