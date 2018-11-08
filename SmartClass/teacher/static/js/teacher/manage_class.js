@@ -17,9 +17,8 @@ $(document).ready(function(){
             $("#videocall"+who).attr("name", message); 
         }else if (time == 'giotay'){
             $('#giotayxxx'+who).show();
-        }else if ((message == 'new_chat_for_teaccher') && (who == userName)){
-            // $('.chat__'+time).click();
-            $('#inbox'+time).show();
+        }else if (message == 'empty'){
+		$(".frame > ul").empty();
         }else if ((time != 'None') && (time != 'call_time') && (time != 'teacher_change_group') && (time != 'teacher_call') && (message != 'new_chat') && (message.includes('Bắt đầu làm bài thi:') == false) && (message.includes('Giao bài tập') == false)){
             insertChat(who, message, time);
         }
