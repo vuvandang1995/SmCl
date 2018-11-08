@@ -44,6 +44,11 @@ class ChatConsumer(WebsocketConsumer):
             self.channel_name
         )
         self.accept()
+        self.send(text_data=json.dumps({
+                        'message': 'empty',
+                        'who': 'empty',
+                        'time' : 'empty'
+                    }))
         try:
             f = r'notification/chat/class/'+self.room_group_name+'.txt'
             file = open(f,'r')
