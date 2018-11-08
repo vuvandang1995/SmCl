@@ -515,11 +515,11 @@ def chi_tiet_de_data(request, id):
                         '''.format(k + 1, result.group(1))
             media = ''
             if "Hình ảnh" in ques.dang_cau_hoi:
-                media = '<img style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/media/{}" alt="không tồn tại" />'.format(ques.dinh_kem)
+                media = '<img style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/static/{}" alt="không tồn tại" />'.format(ques.dinh_kem)
             elif "Âm thanh" in ques.dang_cau_hoi:
-                media = '<br><audio controls width="100%" src="/media/{}"></audio>'.format(ques.dinh_kem)
+                media = '<br><audio controls width="100%" src="/static/{}"></audio>'.format(ques.dinh_kem)
             elif "Video" in ques.dang_cau_hoi:
-                media = '<video controls width="100%" src="/media/{}"></video>'.format(ques.dinh_kem)
+                media = '<video controls width="100%" src="/static/{}"></video>'.format(ques.dinh_kem)
             content += '''
             <label>Câu hỏi {0} ({4} điểm):</label>
             {3}
@@ -788,7 +788,7 @@ def question_data_detail(request, id, bien):
                 media = '''
                     <div class="row">
                         <div class="col-md-8 col-sm-12 col-xs-12 form-group">
-                            <img id="hinh_anh_modal" style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/media/{0}" alt="chọn hình ảnh" />
+                            <img id="hinh_anh_modal" style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/static/{0}" alt="chọn hình ảnh" />
                             <input type='file' style="display: block; margin-left: auto;margin-right: auto;" accept="image/*" />
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12 form-group">
@@ -801,7 +801,7 @@ def question_data_detail(request, id, bien):
                 media = '''
                     <div class="row">
                         <div class="col-md-4 col-sm-12 col-xs-12 form-group">
-                          <audio id="media" controls width="100%" src="/media/{0}"></audio>
+                          <audio id="media" controls width="100%" src="/static/{0}"></audio>
                           <input type="file" style="display: block; margin-left: auto;margin-right: auto;"  accept="audio/*">
                         </div>
                         <div class="col-md-8 col-sm-12 col-xs-12 form-group">
@@ -814,7 +814,7 @@ def question_data_detail(request, id, bien):
                 media = '''
                     <div class="row">
                         <div class="col-md-8 col-sm-12 col-xs-12 form-group">
-                          <video id="media" controls width="100%" src="/media/{0}"></video>
+                          <video id="media" controls width="100%" src="/static/{0}"></video>
                           <input type="file" style="display: block; margin-left: auto;margin-right: auto;" accept="video/*">
                         </div>
                         <div class="col-md-4 col-sm-12 col-xs-12 form-group">
@@ -877,15 +877,15 @@ def question_data_detail(request, id, bien):
                         '''.format(index+1, result.group(1))
             if "Hình ảnh" in ques.dang_cau_hoi:
                 media = '''
-                <img id="hinh_anh_modal" style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/media/{0}" alt="chọn hình ảnh" /><br>
+                <img id="hinh_anh_modal" style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/static/{0}" alt="chọn hình ảnh" /><br>
                 '''.format(ques.dinh_kem)
             elif "Âm thanh" in ques.dang_cau_hoi:
                 media = '''
-                <audio id="media" controls width="100%" src="/media/{0}"></audio>
+                <audio id="media" controls width="100%" src="/static/{0}"></audio>
                 '''.format(ques.dinh_kem)
             elif "Video" in ques.dang_cau_hoi:
                 media = '''
-                <video id="media" controls width="100%" src="/media/{0}"></video>
+                <video id="media" controls width="100%" src="/static/{0}"></video>
                 '''.format(ques.dinh_kem, ques.noi_dung)
             content += '''
             <input hidden name="id" value="{2}">
@@ -934,12 +934,12 @@ def question_data_detail_review(request, ds_ch):
                         dap_an += '''<p>({0}): {1}</p>'''.format(k + 1, result.group(1))
             media = ''
             if "Hình ảnh" in ques.dang_cau_hoi:
-                media = '<img style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/media/{}" alt="không tồn tại" />'.format(
+                media = '<img style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/static/{}" alt="không tồn tại" />'.format(
                     ques.dinh_kem)
             elif "Âm thanh" in ques.dang_cau_hoi:
-                media = '<br><audio controls width="100%" src="/media/{}"></audio>'.format(ques.dinh_kem)
+                media = '<br><audio controls width="100%" src="/static/{}"></audio>'.format(ques.dinh_kem)
             elif "Video" in ques.dang_cau_hoi:
-                media = '<video controls width="100%" src="/media/{}"></video>'.format(ques.dinh_kem)
+                media = '<video controls width="100%" src="/static/{}"></video>'.format(ques.dinh_kem)
             content += '''
             <label>Câu hỏi {0}:</label>
             {3}
