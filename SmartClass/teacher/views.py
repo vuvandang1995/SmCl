@@ -1101,7 +1101,7 @@ def handle_uploaded_file(f):
     name = f.name
     if " " in name:
         name = name.replace(" ", "_")
-    path = "{0}/question_upload/{1}".format(settings.MEDIA_ROOT, name)
+    path = "{0}/question_upload/{1}".format(settings.STATIC_ROOT, name)
     file = open(path, 'wb+')
     for chunk in f.chunks():
         file.write(chunk)
