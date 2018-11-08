@@ -249,13 +249,13 @@ def exam(request, data):
                     dap_an = ''
                     if ctd.cau_hoi_id is not None:
                         if "Hình ảnh" in ctd.cau_hoi_id.dang_cau_hoi:
-                            media = '<img style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/media/{}" alt="không tồn tại" /><br>'.format(
+                            media = '<img style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/static/{}" alt="không tồn tại" /><br>'.format(
                                 ctd.cau_hoi_id.dinh_kem)
                         elif "Âm thanh" in ctd.cau_hoi_id.dang_cau_hoi:
-                            media = '<br><audio controls width="100%" src="/media/{}"></audio>'.format(
+                            media = '<br><audio controls width="100%" src="/static/{}"></audio>'.format(
                                 ctd.cau_hoi_id.dinh_kem)
                         elif "Video" in ctd.cau_hoi_id.dang_cau_hoi:
-                            media = '<video controls width="100%" src="/media/{}"></video>'.format(
+                            media = '<video controls width="100%" src="/static/{}"></video>'.format(
                                 ctd.cau_hoi_id.dinh_kem)
                         if "Trắc nhiệm" in ctd.cau_hoi_id.dang_cau_hoi:
                             da_dung = []
@@ -334,13 +334,13 @@ def exam(request, data):
                                        ds_dap_an["0_{}_undefined".format(ctd.cau_hoi_id.id)], ctd.cau_hoi_id.id)
                     else:
                         if "Hình ảnh" in ctd.cau_hoi_da_id.dang_cau_hoi:
-                            media = '<img style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/media/{}" alt="không tồn tại" /><br>'.format(
+                            media = '<img style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/static/{}" alt="không tồn tại" /><br>'.format(
                                 ctd.cau_hoi_da_id.dinh_kem)
                         elif "Âm thanh" in ctd.cau_hoi_da_id.dang_cau_hoi:
-                            media = '<br><audio controls width="100%" src="/media/{}"></audio>'.format(
+                            media = '<br><audio controls width="100%" src="/static/{}"></audio>'.format(
                                 ctd.cau_hoi_da_id.dinh_kem)
                         elif "Video" in ctd.cau_hoi_da_id.dang_cau_hoi:
-                            media = '<video controls width="100%" src="/media/{}"></video>'.format(
+                            media = '<video controls width="100%" src="/static/{}"></video>'.format(
                                 ctd.cau_hoi_da_id.dinh_kem)
                         if "Trắc nhiệm" in ctd.cau_hoi_da_id.dang_cau_hoi:
                             plus_score = 0
@@ -451,12 +451,12 @@ def exam_data(request, id):
             media = ''
             if ques.cau_hoi_id is not None:
                 if "Hình ảnh" in ques.cau_hoi_id.dang_cau_hoi:
-                    media = '<img style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/media/{}" alt="không tồn tại" /><br>'.format(
+                    media = '<img style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/static/{}" alt="không tồn tại" /><br>'.format(
                         ques.cau_hoi_id.dinh_kem)
                 elif "Âm thanh" in ques.cau_hoi_id.dang_cau_hoi:
-                    media = '<br><audio controls width="100%" src="/media/{}"></audio>'.format(ques.cau_hoi_id.dinh_kem)
+                    media = '<br><audio controls width="100%" src="/static/{}"></audio>'.format(ques.cau_hoi_id.dinh_kem)
                 elif "Video" in ques.cau_hoi_id.dang_cau_hoi:
-                    media = '<video controls width="100%" src="/media/{}"></video>'.format(ques.cau_hoi_id.dinh_kem)
+                    media = '<video controls width="100%" src="/static/{}"></video>'.format(ques.cau_hoi_id.dinh_kem)
                 if "Trắc nhiệm" in ques.cau_hoi_id.dang_cau_hoi:
                     for k, da in enumerate(DapAn.objects.filter(cau_hoi_id=ques.cau_hoi_id)):
                         s = chr(ord(str(k)) + 17)
@@ -503,12 +503,12 @@ def exam_data(request, id):
                     '''.format(i + 1, ques.cau_hoi_id.noi_dung, media, ques.diem, ques.cau_hoi_id.id)
             else:
                 if "Hình ảnh" in ques.cau_hoi_da_id.dang_cau_hoi:
-                    media = '<img style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/media/{}" alt="không tồn tại" /><br>'.format(
+                    media = '<img style="max-height:600px;max-width:600px; display: block; margin-left: auto;margin-right: auto;" src="/static/{}" alt="không tồn tại" /><br>'.format(
                         ques.cau_hoi_da_id.dinh_kem)
                 elif "Âm thanh" in ques.cau_hoi_da_id.dang_cau_hoi:
-                    media = '<br><audio controls width="100%" src="/media/{}"></audio>'.format(ques.cau_hoi_da_id.dinh_kem)
+                    media = '<br><audio controls width="100%" src="/static/{}"></audio>'.format(ques.cau_hoi_da_id.dinh_kem)
                 elif "Video" in ques.cau_hoi_da_id.dang_cau_hoi:
-                    media = '<video controls width="100%" src="/media/{}"></video>'.format(ques.cau_hoi_da_id.dinh_kem)
+                    media = '<video controls width="100%" src="/static/{}"></video>'.format(ques.cau_hoi_da_id.dinh_kem)
                 if "Trắc nhiệm" in ques.cau_hoi_da_id.dang_cau_hoi:
                     for index, ch in enumerate(ChiTietCauHoiDa.objects.filter(cau_hoi_da_id=ques.cau_hoi_da_id)):
                         dap_an += '''
