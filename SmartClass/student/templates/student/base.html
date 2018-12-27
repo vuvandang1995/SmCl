@@ -268,7 +268,7 @@
 
       var userSocket = new ReconnectingWebSocket(
           'wss://' + window.location.host +
-          ':8443/ws/' + userName + '/');
+          '/ws/' + userName + '/');
 
       function escapeHtml(text) {
         return text
