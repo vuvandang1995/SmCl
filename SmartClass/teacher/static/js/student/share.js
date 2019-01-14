@@ -5,7 +5,7 @@ $(document).ready(function(){
 
     var shareAllSocket = new ReconnectingWebSocket(
         'wss://' + window.location.host +
-        ':8443/ws/' + teacher_name + 'shareAll'+lopht+'/');
+        '/ws/' + teacher_name + 'shareAll'+lopht+'/');
 
     $('body').on('click', '#giotay', function(){
         shareAllSocket.send(JSON.stringify({
