@@ -6,7 +6,7 @@ $(document).ready(function(){
     //     '/ws/' + teacher_name + 'chatall'+lop+'*std*'+userName+'/');
     var chatallSocket = new ReconnectingWebSocket(
         'wss://' + window.location.host +
-        ':8443/ws/' + teacher_name + 'chatall'+lop+'*std*'+userName+'/');
+        '/ws/' + teacher_name + 'chatall'+lop+'*std*'+userName+'/');
 
 
     chatallSocket.onmessage = function(e) {
@@ -186,7 +186,7 @@ $(document).ready(function(){
                 //    '/ws/' + group_chat_name + 'chatgroup/');
                     var chatgroup = new ReconnectingWebSocket(
                         'wss://' + window.location.host +
-                        ':8443/ws/' + group_chat_name + 'chatgroup/');
+                        '/ws/' + group_chat_name + 'chatgroup/');
                     var group_name = $('#group_class').children('p').next('p').text();
                     $('#title-chat').html(group_name);
                     $("#chat-group-text").prop('disabled', false);
@@ -330,7 +330,7 @@ $(document).ready(function(){
     var socket_teacher;
     socket_teacher = new ReconnectingWebSocket(
         'wss://' + window.location.host +
-        ':8443/ws/' + userName +teacher_name+lop+'chat11/');
+        '/ws/' + userName +teacher_name+lop+'chat11/');
     // socket_teacher = new ReconnectingWebSocket(
     //     'ws://' + window.location.host +
     //     '/ws/' + userName +teacher_name+lop+'chat11/');
