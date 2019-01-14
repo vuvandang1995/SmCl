@@ -5,7 +5,7 @@ $(document).ready(function(){
 
     shareAllSocket = new ReconnectingWebSocket(
         'wss://' + window.location.host +
-        ':8443/ws/' + userName + 'shareAll'+lopht+'/');
+        '/ws/' + userName + 'shareAll'+lopht+'/');
 
     shareAllSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
