@@ -6,7 +6,7 @@ $(document).ready(function(){
     
     chatallSocket = new ReconnectingWebSocket(
         'wss://' + window.location.host +
-        ':8443/ws/' + userName + 'chatall'+class_+'/');
+        '/ws/' + userName + 'chatall'+class_+'/');
 
     chatallSocket.onmessage = function(e) {
         var data = JSON.parse(e.data);
@@ -148,7 +148,7 @@ $(document).ready(function(){
                 
                 var xxx = new ReconnectingWebSocket(
                     'wss://' + window.location.host +
-                    ':8443/ws/' + gr_chat_name + 'chatgroup/');
+                    '/ws/' + gr_chat_name + 'chatgroup/');
 
                 xxx.onopen = function (event) {
                     xxx.send(JSON.stringify({
@@ -355,7 +355,7 @@ $(document).ready(function(){
             //    '/ws/' + std_username + userName +class_+'chat11/');
                  dict_ws[std_username] = new ReconnectingWebSocket(
                  'wss://' + window.location.host +
-                 ':8443/ws/' + std_username + userName +class_+'chat11/');
+                 '/ws/' + std_username + userName +class_+'chat11/');
                 $("body .chat"+std_username+" > ul").empty();
                 var me = {};
                 me.avatar = "https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/User_man_male_profile_account_person_people.png";
@@ -450,7 +450,7 @@ $(document).ready(function(){
             //    '/ws/' + group_chat_name + 'chatgroup/');
                 dict_group_chat[group_chat_name] = new ReconnectingWebSocket(
                 'wss://' + window.location.host +
-                ':8443/ws/' + group_chat_name + 'chatgroup/');
+                '/ws/' + group_chat_name + 'chatgroup/');
             }
             var group_name = $(this).children('p').next('p').text();
             $('#title-chat').html(group_name);
